@@ -10,11 +10,94 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* 左上ロゴ（今まで通り） */
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 120px;   /* 元のサイズ */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* ページ数インジケーター（画面上部中央） */
+.pageIndicator {
+  position: absolute;
+  top: 20px;             /* 画面上からの距離 */
+  left: 50%;             /* 横中央 */
+  transform: translateX(-50%); /* 完全中央揃え */
+  display: flex;
+  gap: 25px;             /* ページ間の間隔 */
+}
+
+/* 現在のページ */
+.activePage {
+  font-size: 28px;
+  font-weight: bold;
+  position: relative;
+  color: #00008b; /* デフォルト色はアニメーション時には無視される */
+  text-align: center;
+
+  /* グラデーション文字 */
+  background: linear-gradient(270deg, #9acd32, #32cd32, #00bfff, #9acd32);
+  background-size: 600% 600%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* アニメーション */
+  animation: gradientFlow 6s ease infinite;
+}
+
+/* グラデーションを動かすキーフレーム */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* それ以外のページ */
+.inactivePage {
+  font-size: 18px;
+  color: #aaa;
+  position: relative;
+  text-align: center;
+}
+
+/* 現在ページ下の画像 */
+/* ページ下の画像に揺れ・上下左右の動きをつける */
+.pageImage {
+  width: 92px;
+  height: 130px;
+  display: block;
+
+  /* アニメーション追加 */
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(-3px, -3px) rotate(-3deg); }
+  50%  { transform: translate(3px, 3px) rotate(3deg); }
+  75%  { transform: translate(-3px, 3px) rotate(-3deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
 /* 質問文のスタイル */
 .questionText {
   font-size: 43px;        /* 少し大きめの文字サイズ */
   font-weight: bold;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 /* 選択肢全体 */
@@ -65,30 +148,16 @@
   cursor: pointer;
 }
 
-/* 左上ロゴ */
-.logo {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 120px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.logo:hover {
-  transform: scale(1.05); /* ホバー時に少し拡大 */
-}
-
 /* テキストエリア（自由入力欄） */
 .textarea {
-  width: 1000px;             /* 横幅 */
-  height: 500px;             /* 高さ */
-  padding: 15px;             /* 内側余白 */
+  width: 1000px;
+  height: 400px;
   font-size: 1.1rem;
+  padding: 10px;
   font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
   border: 1px solid #ccc;    /* 薄い枠線 */
-  border-radius: 10px;       /* 角丸 */
-  outline: none;             /* フォーカス時の青枠消去 */
+  border-radius: 10px;
+  outline: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }

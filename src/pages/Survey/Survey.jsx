@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import logo from "../../img/CBBS_2.png";
+import one from "../../img/mizuho8186.png";
+import two from "../../img/mizuho8326.png";
+import three from "../../img/mizuho8379.png";
+import four from "../../img/mizuho8560.png";
+import five from "../../img/mizuho8142.png";
+import six from "../../img/mizuho8473.png";
 import styles from "./Survey.module.css";
 
 const questions = [
@@ -27,6 +32,21 @@ const Survey = () => {
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const pages = Array.from({ length: questions.length }, (_, i) => i + 1);
+
+  const pageImages = [one, two, three, four, five];
+
+  // ランダム選択関数を用意
+  const getRandomImage = () => {
+    const index = Math.floor(Math.random() * pageImages.length);
+    return pageImages[index];
+  };
+
+  // コンポーネント内
+  const [pageImagesByStep] = useState(
+    pages.map(() => getRandomImage())
+  );
+
 
   // 回答変更時の処理
   const handleChange = (e, q) => {
@@ -103,12 +123,9 @@ const Survey = () => {
   const q = questions[step];
 
   return (
-    <motion.div
+    <div
       className={styles.container}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1.5, delay: 1 }}
+
     >
       {/* 左上ロゴ */}
       <img
@@ -117,6 +134,22 @@ const Survey = () => {
         className={styles.logo}
         onClick={() => navigate("/")}
       />
+
+      {/* ページ数インジケーター（画面上部中央） */}
+      <div className={styles.pageIndicator}>
+        {pages.map(num => (
+          <div key={num} className={num === step + 1 ? styles.activePage : styles.inactivePage}>
+            {num}
+            {num === step + 1 && (
+              <img
+                src={step === 11 ? six : pageImagesByStep[step]} // ← 12問目ならsix、それ以外はランダム画像
+                alt={`Question ${num}`}
+                className={styles.pageImage}
+              />
+            )}
+          </div>
+        ))}
+      </div>
 
       <h2 className={styles.questionText}>{q.text}</h2>
 
@@ -221,7 +254,7 @@ const Survey = () => {
         </div>
       )}
 
-    </motion.div>
+    </div>
   );
 };
 
