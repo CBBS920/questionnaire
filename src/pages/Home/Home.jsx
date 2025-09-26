@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import styles from "./Home.module.css";
 import qr from "../../img/line_qr.png";
 import logo from "../../img/CBBS_2.png";
@@ -16,20 +17,26 @@ const Home = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <motion.div
+      className={styles.container}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.5, delay: 1 }}
+    >
       {/* 左上ロゴボタン */}
-      <img 
-        src={logo} 
-        alt="CBBS ロゴ" 
-        className={styles.logo} 
-        onClick={() => navigate("/")} 
+      <img
+        src={logo}
+        alt="CBBS ロゴ"
+        className={styles.logo}
+        onClick={() => navigate("/")}
       />
 
       <h1 className={styles.title}>CBBS アンケート</h1>
       <p className={styles.subtitle}>LINE のお友達募集中</p>
       <img src={qr} alt="LINE QRコード" className={styles.qr} />
 
-      <button 
+      <button
         className={styles.startButton}
         onClick={handleStart}
       >
@@ -42,7 +49,7 @@ const Home = () => {
           <p className={styles.loadingText}>読み込み中.....</p>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

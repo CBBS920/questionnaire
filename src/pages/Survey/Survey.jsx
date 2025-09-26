@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import logo from "../../img/CBBS_2.png";
 import styles from "./Survey.module.css";
 
@@ -43,47 +44,53 @@ const Survey = () => {
   const [otherInputs, setOtherInputs] = useState({});
 
 
-const handleNext = () => {
-  const q = questions[step];
-  const ans = answers[q.id];
+  const handleNext = () => {
+    const q = questions[step];
+    const ans = answers[q.id];
 
-  // 未入力チェック
-  if (
-    (q.type === "radio" && !ans) ||
-    (q.type === "checkbox" && (!ans || ans.length === 0)) ||
-    (q.type === "text" && q.id !== 12 && (!ans || ans.trim() === ""))
-  ) {
-    setShowError(true);
-    return;
-  }
+    // 未入力チェック
+    if (
+      (q.type === "radio" && !ans) ||
+      (q.type === "checkbox" && (!ans || ans.length === 0)) ||
+      (q.type === "text" && q.id !== 12 && (!ans || ans.trim() === ""))
+    ) {
+      setShowError(true);
+      return;
+    }
 
-  // 最終ステップ以外は step を進める
-  if (step < questions.length - 1) {
-    setStep(step + 1);
-    return;
-  }
+    // 最終ステップ以外は step を進める
+    if (step < questions.length - 1) {
+      setStep(step + 1);
+      return;
+    }
 
-  // 最終ステップの場合、送信
-  const finalAnswers = { ...answers };
+    // 最終ステップの場合、送信
+    const finalAnswers = { ...answers };
 
-  Object.keys(otherInputs).forEach(qid => {
-    finalAnswers[qid] = finalAnswers[qid].map(ans =>
-      ans === "その他" ? `${ans}: ${otherInputs[qid]}` : ans
-    );
-  });
+    Object.keys(otherInputs).forEach(qid => {
+      finalAnswers[qid] = finalAnswers[qid].map(ans =>
+        ans === "その他" ? `${ans}: ${otherInputs[qid]}` : ans
+      );
+    });
 
-  fetch("http://localhost:5000/api/survey", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(finalAnswers)
-  }).then(() => navigate("/thankyou"));
-};
+    fetch("http://localhost:5000/api/survey", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(finalAnswers)
+    }).then(() => navigate("/thankyou"));
+  };
 
 
   const q = questions[step];
 
   return (
-    <div className={styles.container}>
+    <motion.div
+      className={styles.container}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.5, delay: 1 }}
+    >
       <img
         src={logo}
         alt="CBBS ロゴ"
@@ -169,7 +176,7 @@ const handleNext = () => {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
