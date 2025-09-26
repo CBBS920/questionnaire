@@ -19,14 +19,19 @@ const questions = [
   { id: 12, text: "その他ご意見があれば！", type: "text" }
 ];
 
+// アンケート画面
+// アンケート画面
 const Survey = () => {
-  const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState({});
+  const [step, setStep] = useState(0);             // 現在の質問ステップ
+  const [answers, setAnswers] = useState({});      // 各質問の回答を保存
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
+  // 回答変更時の処理
   const handleChange = (e, q) => {
     if (q.type === "checkbox") {
+      // チェックボックスの場合、複数回答を配列で管理
       setAnswers(prev => {
         const arr = prev[q.id] || [];
         if (e.target.checked) {
@@ -36,13 +41,13 @@ const Survey = () => {
         }
       });
     } else {
+      // ラジオボタンやテキストの場合は単一値で管理
       setAnswers(prev => ({ ...prev, [q.id]: e.target.value }));
     }
   };
 
   // 「その他」の入力用state
   const [otherInputs, setOtherInputs] = useState({});
-
 
   const handleNext = () => {
     const q = questions[step];
@@ -58,26 +63,40 @@ const Survey = () => {
       return;
     }
 
-    // 最終ステップ以外は step を進める
+    // 最終ステップ以外は次の質問に進む
     if (step < questions.length - 1) {
       setStep(step + 1);
       return;
     }
 
-    // 最終ステップの場合、送信
+    // 最終ステップの場合、送信処理
     const finalAnswers = { ...answers };
 
     Object.keys(otherInputs).forEach(qid => {
-      finalAnswers[qid] = finalAnswers[qid].map(ans =>
-        ans === "その他" ? `${ans}: ${otherInputs[qid]}` : ans
-      );
+      const answer = finalAnswers[qid];
+      if (Array.isArray(answer)) {
+        finalAnswers[qid] = answer.map(ans =>
+          ans === "その他" ? `${ans}: ${otherInputs[qid]}` : ans
+        );
+      } else if (answer === "その他") {
+        finalAnswers[qid] = `その他: ${otherInputs[qid]}`;
+      }
     });
 
+    // ローディングON
+    setLoading(true);
+
+    // サーバー送信
     fetch("http://localhost:5000/api/survey", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(finalAnswers)
-    }).then(() => navigate("/thankyou"));
+    })
+      .then(res => res.json()) // 必要に応じてレスポンス取得
+      .finally(() => {
+        setLoading(false);        // ローディングOFF
+        navigate("/thankyou");    // サンクスページへ
+      });
   };
 
 
@@ -91,6 +110,7 @@ const Survey = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 1.5, delay: 1 }}
     >
+      {/* 左上ロゴ */}
       <img
         src={logo}
         alt="CBBS ロゴ"
@@ -106,15 +126,31 @@ const Survey = () => {
       >
         {q.type === "radio" &&
           q.options.map(opt => (
-            <label key={opt} className={styles.optionItem}>
-              <input
-                type="radio"
-                name={q.id}
-                value={opt}
-                onChange={e => handleChange(e, q)}
-              />
-              {opt}
-            </label>
+            <div key={opt} className={styles.optionItem}>
+              <label>
+                <input
+                  type="radio"
+                  name={q.id}
+                  value={opt}
+                  checked={answers[q.id] === opt}
+                  onChange={e => handleChange(e, q)}
+                />
+                {opt}
+              </label>
+
+              {/* ラジオボタンの「その他」入力欄 */}
+              {opt === "その他" && answers[q.id] === "その他" && (
+                <input
+                  type="text"
+                  placeholder="具体的に入力してください"
+                  className={styles.otherInput}
+                  value={otherInputs[q.id] || ""}
+                  onChange={e =>
+                    setOtherInputs(prev => ({ ...prev, [q.id]: e.target.value }))
+                  }
+                />
+              )}
+            </div>
           ))}
 
         {q.type === "checkbox" &&
@@ -129,7 +165,7 @@ const Survey = () => {
                 {opt}
               </label>
 
-              {/* 「その他」が選択されたときだけテキスト入力 */}
+              {/* チェックボックスの「その他」入力欄 */}
               {opt === "その他" && answers[q.id]?.includes("その他") && (
                 <input
                   type="text"
@@ -144,7 +180,6 @@ const Survey = () => {
             </div>
           ))}
 
-
         {q.type === "text" && (
           <textarea
             className={styles.textarea}
@@ -153,6 +188,7 @@ const Survey = () => {
         )}
       </div>
 
+      {/* 次へ/送信ボタン */}
       <button className={styles.nextButton} onClick={handleNext}>
         {step === questions.length - 1 ? "送信" : "進む"}
       </button>
@@ -176,8 +212,18 @@ const Survey = () => {
           </div>
         </div>
       )}
+
+      {/* 読み込み中オーバーレイ */}
+      {loading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loader}></div>
+          <p className={styles.loadingText}>送信中.....</p>
+        </div>
+      )}
+
     </motion.div>
   );
 };
+
 
 export default Survey;

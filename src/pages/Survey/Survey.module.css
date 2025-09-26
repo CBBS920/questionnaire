@@ -1,17 +1,18 @@
+/* アンケート全体コンテナ */
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  justify-content: center; /* 縦中央揃え */
+  align-items: center;     /* 横中央揃え */
+  min-height: 100vh;       /* 画面全体の高さ確保 */
   text-align: center;
   padding: 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* 質問文の文字サイズを大きく */
+/* 質問文のスタイル */
 .questionText {
-  font-size: 43px; /* 少し大きめ */
+  font-size: 43px;        /* 少し大きめの文字サイズ */
   font-weight: bold;
   margin-bottom: 40px;
 }
@@ -22,17 +23,17 @@
   flex-direction: column;
 }
 
-/* ラジオボタン・チェックボックス共通 */
+/* ラジオボタン・チェックボックスの基本スタイル */
 .optionItem input[type="radio"],
 .optionItem input[type="checkbox"] {
-  accent-color: #7fffd4;
+  accent-color: #7fffd4;  /* チェックマークの色 */
   width: 20px;
   height: 20px;
   margin-right: 8px;
   cursor: pointer;
 }
 
-/* ラベルの文字 */
+/* ラベル・選択肢の文字 */
 .optionItem {
   font-size: 22px;
   cursor: pointer;
@@ -43,28 +44,28 @@
 }
 
 .optionItem:hover {
-  color: green; /* ホバー時に文字を緑色に */
+  color: green; /* ホバー時に文字を緑色に変化 */
 }
 
-/* 8個以上なら2列 */
+/* 選択肢が8個以上なら2列レイアウト */
 .twoColumn {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 2列 */
-  gap: 10px 30px; /* 縦・横の間隔 */
+  grid-template-columns: 1fr 1fr; /* 2列に分ける */
+  gap: 10px 30px;                /* 縦・横の間隔 */
   text-align: left;
 }
 
-/* ラジオやチェックボックスを整列 */
+/* ラジオやチェックボックスの微調整 */
 .optionItem input {
   margin-right: 5px;
 }
-
 
 .optionLabel {
   font-size: 1rem;
   cursor: pointer;
 }
 
+/* 左上ロゴ */
 .logo {
   position: absolute;
   top: 20px;
@@ -75,32 +76,34 @@
 }
 
 .logo:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* ホバー時に少し拡大 */
 }
 
+/* テキストエリア（自由入力欄） */
 .textarea {
-  width: 1000px;              /* コンテナ幅にフィット */
-  height: 500px;            /* 高さを少しアップ */
-  padding: 15px;            /* 内側に余白 */
-  font-size: 1.1rem;        /* 少し大きめ文字 */
+  width: 1000px;             /* 横幅 */
+  height: 500px;             /* 高さ */
+  padding: 15px;             /* 内側余白 */
+  font-size: 1.1rem;
   font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
-  border: 1px solid #ccc;   /* 薄い枠線 */
-  border-radius: 10px;      /* 角丸で柔らかい印象 */
-  outline: none;            /* フォーカス時の青枠を消す */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* ほんのり影 */
+  border: 1px solid #ccc;    /* 薄い枠線 */
+  border-radius: 10px;       /* 角丸 */
+  outline: none;             /* フォーカス時の青枠消去 */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 .textarea:focus {
-  border-color: #4a90e2;    /* フォーカス時にブルーに */
+  border-color: #4a90e2;     /* フォーカス時の色 */
   box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3); /* 青い影 */
 }
 
+/* 「その他」入力欄 */
 .otherInput {
-  flex: 1;               /* ラベルの横に余った幅いっぱいで表示 */
-  min-width: 200px;      /* 最低幅は確保 */
+  flex: 1;                     /* ラベルの横に広げる */
+  min-width: 200px;
   padding: 10px 14px;
-  margin-left: 5px;         /* 上余白は無しで横並びに */
+  margin-left: 5px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 12px;
@@ -120,7 +123,7 @@
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
 
-
+/* 次へ/送信ボタン */
 .nextButton {
   margin-top: 30px;
   background-color: #9acd32; /* 黄緑 */
@@ -142,14 +145,14 @@
   transform: scale(0.95);
 }
 
-/* モーダル背景 */
+/* エラーモーダルの背景 */
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.4); /* 半透明黒 */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,7 +169,7 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* ヘッダー */
+/* モーダルヘッダー */
 .modalHeader {
   background: red;
   color: white;
@@ -185,9 +188,47 @@
   cursor: pointer;
 }
 
-/* 本文 */
+/* モーダル本文 */
 .modalBody {
   padding: 50px;
   background: white;
   font-size: 20px;
+}
+
+/* ローディング画面全体を覆うオーバーレイ */
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9); /* 半透明白背景 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* 他の要素より前面に */
+}
+
+/* ローディングアニメーション（クルクル回る丸） */
+.loader {
+  border: 6px solid #f3f3f3; /* 薄いグレー */
+  border-top: 6px solid #9acd32; /* 黄緑部分 */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ローディングテキスト */
+.loadingText {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #333;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
 }
