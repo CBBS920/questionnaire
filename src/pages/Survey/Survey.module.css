@@ -6,6 +6,7 @@
   align-items: center;     /* 横中央揃え */
   min-height: 100vh;       /* 画面全体の高さ確保 */
   text-align: center;
+  background-color: #fffff0;
   padding: 20px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -240,7 +241,7 @@
 
 /* モーダルヘッダー */
 .modalHeader {
-  background: red;
+  background: #000000;
   color: white;
   padding: 10px;
   display: flex;

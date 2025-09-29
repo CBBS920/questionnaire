@@ -25,7 +25,6 @@ const questions = [
 ];
 
 // アンケート画面
-// アンケート画面
 const Survey = () => {
   const [step, setStep] = useState(0);             // 現在の質問ステップ
   const [answers, setAnswers] = useState({});      // 各質問の回答を保存
@@ -240,7 +239,7 @@ const Survey = () => {
               </button>
             </div>
             <div className={styles.modalBody}>
-              どれか一つ入力してください
+              どれか一つ選んでね！
             </div>
           </div>
         </div>

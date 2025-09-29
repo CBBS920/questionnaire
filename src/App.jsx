@@ -4,7 +4,8 @@ import Survey from "./pages/Survey/Survey";
 import ThankYou from "./pages/ThankYou/ThankYou";
 
 const App = () => {
-  const location = useLocation(); // 現在のURLパスを取得（アニメーションや再レンダリング制御に使用可能）
+  // 現在のURLパスを取得（アニメーションや再レンダリング制御に使用可能）
+  const location = useLocation(); 
   
   return (
     <Routes location={location} key={location.pathname}>

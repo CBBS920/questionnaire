@@ -1,19 +1,19 @@
 /* 全体コンテナ */
 .container {
-  position: relative;          /* ロゴやコンフェッティの絶対配置に対応 */
+  position: relative;
   width: 100%;
-  height: 100vh;               /* 画面全体にフィット */
-  background: #f0f8ff;        /* 背景色 */
+  height: 100vh;
+  background-color: #fffff0;
   display: flex;
   flex-direction: column;
-  justify-content: center;     /* 中央揃え */
+  justify-content: center;
   align-items: center;
-  overflow: hidden;            /* コンフェッティなどはみ出しても隠す */
+  overflow: hidden; /* コンフェッティなどはみ出しても隠す */
 }
 
 /* 左上ロゴ */
 .logo {
-  position: absolute;          /* 左上固定配置 */
+  position: absolute;
   top: 20px;
   left: 20px;
   width: 120px;
