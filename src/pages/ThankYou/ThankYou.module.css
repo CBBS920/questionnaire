@@ -27,7 +27,7 @@
 
 /* タイトル文字 */
 .title {
-  font-size: 45px;
+  font-size: 50px;
   font-weight: bold;
   text-align: center;
 
@@ -50,6 +50,7 @@
 /* ボタン */
 .button {
   padding: 0.8rem 1.5rem;
+  margin-top: 40px;
   font-size: 1rem;
   background-color: #9acd32;
   color: #fff;

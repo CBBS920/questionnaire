@@ -17,12 +17,6 @@
   top: 20px;
   left: 20px;
   width: 120px;
-  cursor: pointer;
-  transition: transform 0.2s ease; /* ホバー時の拡大アニメーション */
-}
-
-.logo:hover {
-  transform: scale(1.05); /* ホバーで少し拡大 */
 }
 
 /* タイトル */
