@@ -22,7 +22,7 @@
 }
 
 .logo:hover {
-  transform: scale(1.05);      /* ホバーで少し拡大 */
+  transform: scale(1.05);
 }
 
 /* タイトル文字 */
@@ -31,7 +31,6 @@
   font-weight: bold;
   text-align: center;
 
-  /* グラデーション文字 */
   background: linear-gradient(270deg, #9acd32, #32cd32, #00bfff, #9acd32);
   background-size: 600% 600%;
   background-clip: text;
@@ -61,7 +60,7 @@
 }
 
 .button:hover {
-  transform: scale(1.05);     /* ホバーで少し拡大 */
+  transform: scale(1.05);
 }
 
 /* コンフェッティ（紙吹雪）全体 */
@@ -79,7 +78,7 @@
   display: block;
   width: 10px;
   height: 10px;
-  background-color: red;       /* 初期色、JSでランダムに変更 */
+  background-color: red;
   opacity: 0.8;
   animation-name: confettiFall;
   animation-duration: 3s;

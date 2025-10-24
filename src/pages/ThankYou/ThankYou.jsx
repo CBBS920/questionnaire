@@ -7,19 +7,24 @@ import logo from "../../img/CBBS_2.png";
 // アンケート終了画面
 const ThankYou = () => {
   const navigate = useNavigate();
-  const [confettiArray, setConfettiArray] = useState([]); // クラッカー用の配列
+  // クラッカー用の配列
+  const [confettiArray, setConfettiArray] = useState([]);
 
   useEffect(() => {
     // 画面表示後すぐにクラッカー（コンフェッティ）を作成
-    const confettiCount = 100; // 数量
+    const confettiCount = 100;
     const colors = ["#f94144", "#f3722c", "#f9c74f", "#90be6d", "#43aa8b", "#577590"]; // 色の配列
 
     // 各コンフェッティの位置・色・サイズ・遅延をランダム生成
     const confettis = Array.from({ length: confettiCount }).map(() => {
-      const x = Math.floor(Math.random() * window.innerWidth) + "px"; // 左右位置
-      const delay = Math.random() * 2 + "s";                           // アニメーション遅延
-      const color = colors[Math.floor(Math.random() * colors.length)]; // 色ランダム
-      const size = Math.random() * 12 + 6 + "px";                      // サイズランダム
+      // 左右位置
+      const x = Math.floor(Math.random() * window.innerWidth) + "px";
+      // アニメーション遅延
+      const delay = Math.random() * 2 + "s";
+      // 色ランダム
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      // サイズランダム
+      const size = Math.random() * 12 + 6 + "px";
       return { x, delay, color, size };
     });
 

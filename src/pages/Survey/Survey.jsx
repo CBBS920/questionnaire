@@ -28,13 +28,12 @@ const questions = [
 
 // アンケート画面コンポーネント
 const Survey = () => {
-  // ステート管理
-  const [step, setStep] = useState(0);                 // 現在の質問番号
-  const [answers, setAnswers] = useState({});          // 回答内容
-  const [showError, setShowError] = useState(false);   // エラーモーダル表示
-  const [errorMessage, setErrorMessage] = useState(""); // エラーメッセージ文言
-  const [otherInputs, setOtherInputs] = useState({});  // 「その他」入力内容
-  const [loading, setLoading] = useState(false);       // ローディング状態
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [otherInputs, setOtherInputs] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // ページ番号とランダム画像設定
@@ -117,11 +116,12 @@ const Survey = () => {
       .then(res => res.json())
       .finally(() => {
         setLoading(false);
-        navigate("/thankyou"); // サンクスページへ
+        navigate("/thankyou");
       });
   };
 
-  const q = questions[step]; // 現在の質問を取得
+  // 現在の質問を取得
+  const q = questions[step];
 
   return (
     <div className={styles.container}>

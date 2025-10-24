@@ -11,9 +11,11 @@ const Home = () => {
   const [loading, setLoading] = useState(false); // アンケート開始時の読み込み表示用state
 
   const handleStart = () => {
-    setLoading(true); // 読み込み表示をON
+    // 読み込み表示をON
+    setLoading(true);
     setTimeout(() => {
-      navigate("/survey"); // 1.6秒後にアンケートページへ遷移
+      // 1.6秒後にアンケートページへ遷移
+      navigate("/survey");
     }, 1600);
   };
 
@@ -30,7 +32,7 @@ const Home = () => {
         src={logo}
         alt="CBBS ロゴ"
         className={styles.logo}
-        onClick={() => navigate("/")} // クリックでホームに戻る
+        onClick={() => navigate("/")}
       />
 
       {/* タイトル・サブタイトル */}

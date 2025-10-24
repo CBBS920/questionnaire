@@ -76,9 +76,7 @@
 .pageContainer {
   display: flex;
   flex-direction: column;
-  /* 縦方向に配置 */
   align-items: center;
-  /* 中央揃え */
   justify-content: center;
 }
 
@@ -129,7 +127,6 @@
 /* 質問文のスタイル */
 .questionText {
   font-size: 43px;
-  /* 少し大きめの文字サイズ */
   font-weight: bold;
   margin-bottom: 30px;
 }
@@ -144,7 +141,6 @@
 .optionItem input[type="radio"],
 .optionItem input[type="checkbox"] {
   accent-color: #7fffd4;
-  /* チェックマークの色 */
   width: 20px;
   height: 20px;
   margin-right: 8px;
@@ -163,16 +159,14 @@
 
 .optionItem:hover {
   color: green;
-  /* ホバー時に文字を緑色に変化 */
 }
 
 /* 選択肢が8個以上なら2列レイアウト */
 .twoColumn {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   /* 2列に分ける */
+  grid-template-columns: 1fr 1fr;
   gap: 10px 30px;
-  /* 縦・横の間隔 */
   text-align: left;
 }
 
@@ -194,7 +188,6 @@
   padding: 10px;
   font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
   border: 1px solid #ccc;
-  /* 薄い枠線 */
   border-radius: 10px;
   outline: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -203,15 +196,12 @@
 
 .textarea:focus {
   border-color: #4a90e2;
-  /* フォーカス時の色 */
   box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
-  /* 青い影 */
 }
 
 /* 「その他」入力欄 */
 .otherInput {
   flex: 1;
-  /* ラベルの横に広げる */
   min-width: 200px;
   padding: 10px 14px;
   margin-left: 5px;
@@ -238,7 +228,6 @@
 .nextButton {
   margin-top: 30px;
   background-color: #9acd32;
-  /* 黄緑 */
   color: white;
   border: none;
   border-radius: 8px;
@@ -383,21 +372,17 @@
   width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0.9);
-  /* 半透明白背景 */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  /* 他の要素より前面に */
 }
 
 /* ローディングアニメーション（クルクル回る丸） */
 .loader {
   border: 6px solid #f3f3f3;
-  /* 薄いグレー */
   border-top: 6px solid #9acd32;
-  /* 黄緑部分 */
   border-radius: 50%;
   width: 60px;
   height: 60px;

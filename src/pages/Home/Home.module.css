@@ -32,7 +32,7 @@
   -webkit-text-fill-color: transparent;
 
   /* グラデーションアニメーション */
-  animation: gradientFlow 6s ease infinite;
+  animation: gradientFlow 5s ease infinite;
 }
 
 @keyframes gradientFlow {
@@ -89,13 +89,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 9999; /* 他の要素より前面に */
+  z-index: 9999;
 }
 
 /* ローディングアニメーション（クルクル回る丸） */
 .loader {
-  border: 6px solid #f3f3f3; /* 薄いグレー */
-  border-top: 6px solid #9acd32; /* 黄緑部分 */
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #9acd32;
   border-radius: 50%;
   width: 60px;
   height: 60px;
