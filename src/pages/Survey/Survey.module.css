@@ -126,7 +126,7 @@
 
 /* 質問文のスタイル */
 .questionText {
-  font-size: 43px;
+  font-size: 45px;
   font-weight: bold;
   margin-bottom: 30px;
 }
@@ -149,7 +149,7 @@
 
 /* ラベル・選択肢の文字 */
 .optionItem {
-  font-size: 22px;
+  font-size: 27px;
   cursor: pointer;
   margin: 8px 0;
   display: flex;
@@ -168,6 +168,15 @@
   grid-template-columns: 1fr 1fr;
   gap: 10px 30px;
   text-align: left;
+}
+
+/* 10問目専用：3列レイアウト */
+.threeColumn {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3列 */
+  gap: 10px 25px;
+  text-align: left;
+  justify-content: center;
 }
 
 /* ラジオやチェックボックスの微調整 */
@@ -233,15 +242,15 @@
   font-style: italic;
 }
 
-/* 次へ/送信ボタン */
+/* 次へ/送信/戻るボタン */
 .nextButton {
   margin-top: 30px;
   background-color: #9acd32;
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 15px 40px;
-  font-size: 23px;
+  padding: 15px 45px;
+  font-size: 28px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -253,6 +262,14 @@
 
 .nextButton:active {
   transform: scale(0.95);
+}
+
+/* ボタン全体の並び */
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  margin-top: 30px;
 }
 
 /* クレジット */

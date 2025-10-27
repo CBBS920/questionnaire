@@ -18,8 +18,8 @@ const questions = [
   { id: 4, text: "あなたのスマホの月額料金はいくらですか？", type: "radio", options: ["2000円未満", "2000円～5000円", "5001円以上", "わからない"] },
   { id: 5, text: "ポケットWi-Fi（モバイルルーター）を持っていますか？", type: "radio", options: ["はい", "いいえ"] },
   { id: 6, text: "全キャリア（docomo, SoftBank, au）が使えるポケットWi-Fiを使ってみたいですか？", type: "radio", options: ["はい", "いいえ", "どちらともいえない"] },
-  { id: 7, text: "スマホやパソコン、ネットで困ってることはありますか？", type: "checkbox", options: ["料金が高い", "繋がりにくい", "操作がわからない", "とくに困っていない", "その他"] },
-  { id: 8, text: "スマホやパソコン、ネット困ってることを相談できる人がいますか？", type: "radio", options: ["はい", "いいえ"] },
+  { id: 7, text: "スマホやパソコン、ネットで困っていることはありますか？", type: "checkbox", options: ["料金が高い", "繋がりにくい", "操作がわからない", "とくに困っていない", "その他"] },
+  { id: 8, text: "スマホやパソコン、ネット困っていることを相談できる人がいますか？", type: "radio", options: ["はい", "いいえ"] },
   { id: 9, text: "CBBSのキャンペーンで嬉しい特典はどれですか？", type: "radio", options: ["割引（月額費など）", "訪問サポート無料", "金券", "機器（ルーターなど）", "食品", "その他"] },
   { id: 10, text: "川根本町内にどんな施設やサービスがあったらいいですか？", type: "checkbox", options: ["コインランドリー", "ホームセンター", "マンガ喫茶", "カラオケ", "ゲームセンター", "ドラッグストア", "お弁当屋", "カフェ", "携帯ショップ", "100円ショップ", "家事代行", "引越業者", "ビジネスホテル", "その他"] },
   { id: 11, text: "産業祭で一番興味のあるブースはどれですか？", type: "radio", options: ["ミニゲーム", "飲食", "体験", "その他"] },
@@ -157,7 +157,11 @@ const Survey = () => {
       <h2 className={styles.questionText}>{q.text}</h2>
 
       {/* 選択肢エリア */}
-      <div className={`${styles.options} ${q.options && q.options.length >= 8 ? styles.twoColumn : ""}`}>
+      <div
+        className={`${styles.options} 
+        ${q.id === 10 ? styles.threeColumn : ""} 
+        ${q.options && q.options.length >= 8 && q.id !== 10 ? styles.twoColumn : ""}`}
+      >
         {/* ラジオボタン */}
         {q.type === "radio" && q.options.map(opt => (
           <div key={opt} className={styles.optionItem}>
@@ -225,10 +229,20 @@ const Survey = () => {
         <p className={styles.note}>※複数選択可</p>
       )}
 
-      {/* 次へ/送信ボタン */}
-      <button className={styles.nextButton} onClick={handleNext}>
-        {step === questions.length - 1 ? "送信" : "進む"}
-      </button>
+      {/* 次へ/送信/戻るボタン */}
+      <div className={styles.buttonContainer}>
+        {step > 0 && (
+          <button
+            className={styles.nextButton}
+            onClick={() => setStep(step - 1)} // ← ここで直接戻る処理
+          >
+            戻る
+          </button>
+        )}
+        <button className={styles.nextButton} onClick={handleNext}>
+          {step === questions.length - 1 ? "送信" : "進む"}
+        </button>
+      </div>
 
       {/* クレジット表示（右下固定） */}
       <div className={styles.credit}>
