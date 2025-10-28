@@ -104,14 +104,32 @@
   text-align: center;
 }
 
-/* メッセージテキスト */
+/* モーダルメッセージ（グラデーションアニメーション付き） */
 .modalMessage {
-  color: #333;
   font-size: 35px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 35px;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+  text-align: center;
+  text-shadow: none;
+
+  /* グラデーション文字設定 */
+  background: linear-gradient(270deg, #9acd32, #32cd32, #00bfff, #9acd32);
+  background-size: 600% 600%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* グラデーションアニメーション */
+  animation: gradientFlow 6s ease infinite;
 }
+
+/* アニメーションキーフレーム */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
 /* メッセージ内容 */
 .modalContent {
